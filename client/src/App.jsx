@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Single from './pages/Single';
 import Write from './pages/Write';
+import './style.scss';
 
 const router = createBrowserRouter([
   {
@@ -17,15 +18,7 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: '/login',
-        element: <Login />
-      },
-      {
-        path: '/register',
-        element: <Register />
-      },
-      {
-        path: '/single',
+        path: '/post/:id',
         element: <Single />
       },
       {
@@ -33,6 +26,14 @@ const router = createBrowserRouter([
         element: <Write />
       }
     ]
+  },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/register',
+    element: <Register />
   }
 ]);
 
