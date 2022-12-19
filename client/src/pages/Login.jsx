@@ -1,9 +1,8 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Login = () => {
   return (
-    <div className="auth">
+    <main className="auth">
       <h1>Login</h1>
       <form action="">
         <input
@@ -22,7 +21,7 @@ const Login = () => {
           Don't you have an account ? <Link to={'/register'}>Register</Link>
         </span>
       </form>
-    </div>
+    </main>
   )
 }
 

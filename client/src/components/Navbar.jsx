@@ -4,10 +4,12 @@ import Logo from '../images/snapBlog-logo.png';
 
 const Navbar = () => {
   return (
-    <div className='navbar'>
+    <nav className='navbar'>
       <div className="container">
         <div className="logo">
-          <img src={Logo} alt="snap-blog-logo" />
+          <Link to={'/'}>
+            <img src={Logo} alt="snap-blog-logo" />
+          </Link>
         </div>
         <div className="links">
           <Link to={'/?categorie=art'} className='link'>
@@ -38,7 +40,7 @@ const Navbar = () => {
           </span>
         </div>
       </div>
-    </div>
+    </nav>
   )
 }
 

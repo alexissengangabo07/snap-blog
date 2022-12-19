@@ -1,9 +1,8 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Register = () => {
   return (
-    <div className="auth">
+    <main className="auth">
       <h1>Register</h1>
       <form action="">
         <input
@@ -27,7 +26,7 @@ const Register = () => {
           Do you have an account ? <Link to={'/login'}>Login</Link>
         </span>
       </form>
-    </div>
+    </main>
   )
 }
 

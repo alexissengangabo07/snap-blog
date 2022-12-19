@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Logo from '../images/snapBlog-logo.png';
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer>
+      <img src={Logo} alt="logoimg" />
+      <span>Made with ❤️ <strong>snapTech</strong></span>
+    </footer>
   )
 }
 
