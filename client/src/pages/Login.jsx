@@ -9,10 +9,12 @@ const Login = () => {
         <input
           type="text"
           placeholder='username'
+          required
         />
         <input
           type="password"
           placeholder='password'
+          required
         />
         <button type='submit'>Login</button>
         <p>This is an error !</p>

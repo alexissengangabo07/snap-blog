@@ -9,14 +9,17 @@ const Register = () => {
         <input
           type="text"
           placeholder='username'
+          required
         />
          <input
           type="email"
           placeholder='email'
+          required
         />
         <input
           type="password"
           placeholder='password'
+          required
         />
         <button type='submit'>Register</button>
         <p>This is an error !</p>
