@@ -13,6 +13,7 @@ const Single = () => {
           <img src={Image} alt="ok" />
           <div className="info">
             <span>Alexis Sen</span>
+            <p>Posted 2 days ago</p>
           </div>
           <div className="edit">
             <Link to='/write?edit=2'><CiEdit color='teal' size={30} /></Link>
