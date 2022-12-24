@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from './Layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -38,11 +40,10 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  axios.get('http://localhost:5000/api/posts')
-    .then(({ data }) => console.log(data));
   return (
     <div className="app">
-      <div className="container">
+      <ToastContainer />
+      <div className={(location.pathname === '/register' || location.pathname === '/login') ? 'container' : 'container container-width'}>
         <RouterProvider router={router} />
       </div>
     </div>
