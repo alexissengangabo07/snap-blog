@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -12,10 +13,21 @@ const Register = () => {
     setInputs(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      console.log(inputs);
+      const response = await axios.post('http://localhost:5000/api/auth/register', inputs);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <main className="auth">
       <h1>Register</h1>
-      <form action="">
+      <form action="" autoComplete='off' onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder='username'
@@ -35,6 +47,7 @@ const Register = () => {
           placeholder='password'
           name='password'
           onChange={handleChange}
+          autoComplete='off'
           required
         />
         <button type='submit'>Register</button>
