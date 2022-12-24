@@ -42,8 +42,7 @@ const App = () => {
     .then(({ data }) => console.log(data));
   return (
     <div className="app">
-      {console.log(window.location.pathname)}
-      <div className={(window.location.pathname !== '/register' || window.location.pathname !== '/login') ? 'container' : 'poo'}>
+      <div className="container">
         <RouterProvider router={router} />
       </div>
     </div>

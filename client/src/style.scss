@@ -48,6 +48,11 @@ $lightGreen: #b9e7e7;
           padding: 10px;
           border: none;
           border-bottom: 1px solid gray;
+          outline: none;
+
+          &:focus {
+            border-bottom: 1px solid teal;
+          }
         }
 
         button {
@@ -56,6 +61,11 @@ $lightGreen: #b9e7e7;
           background-color: teal;
           color: #fff;
           border: none;
+          transition: all .7s ease;
+
+          &:hover {
+            background-color: rgb(3, 87, 87);
+          }
         }
 
         p {
