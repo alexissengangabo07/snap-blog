@@ -1,6 +1,17 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 const Register = () => {
+  const [inputs, setInputs] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = e => {
+    setInputs(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
   return (
     <main className="auth">
       <h1>Register</h1>
@@ -8,16 +19,22 @@ const Register = () => {
         <input
           type="text"
           placeholder='username'
+          name='username'
+          onChange={handleChange}
           required
         />
-         <input
+        <input
           type="email"
           placeholder='email'
+          name='email'
+          onChange={handleChange}
           required
         />
         <input
           type="password"
           placeholder='password'
+          name='password'
+          onChange={handleChange}
           required
         />
         <button type='submit'>Register</button>
