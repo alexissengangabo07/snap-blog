@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Register = () => {
-  const [inputs, setInputs] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
+  const [inputs, setInputs] = useState({ username: '', email: '', password: '' });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = e => {
     setInputs(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -16,11 +15,14 @@ const Register = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      console.log(inputs);
       const response = await axios.post('http://localhost:5000/api/auth/register', inputs);
-      console.log(response);
+      toast.success("Conratulation, you are registered successfully, so login to your account !", {
+        autoClose: 13000
+      });
+      navigate('/login');
     } catch (error) {
-      console.log(error);
+      setError(error.response.data);
+      toast.error(error.response.data);
     }
   }
 
@@ -28,6 +30,7 @@ const Register = () => {
     <main className="auth">
       <h1>Register</h1>
       <form action="" autoComplete='off' onSubmit={handleSubmit}>
+        {error && <p>{error}</p>}
         <input
           type="text"
           placeholder='username'
@@ -51,7 +54,6 @@ const Register = () => {
           required
         />
         <button type='submit'>Register</button>
-        <p>This is an error !</p>
         <span>
           Do you have an account ? <Link to={'/login'}>Login</Link>
         </span>

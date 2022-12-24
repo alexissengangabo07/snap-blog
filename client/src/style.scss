@@ -19,8 +19,7 @@ $lightGreen: #b9e7e7;
   }
 
   .container {
-    width: 1024px;
-
+    width: 100%;
     //Login & Register
     .auth {
       display: flex;
@@ -61,7 +60,7 @@ $lightGreen: #b9e7e7;
           background-color: teal;
           color: #fff;
           border: none;
-          transition: all .7s ease;
+          transition: all 0.7s ease;
 
           &:hover {
             background-color: rgb(3, 87, 87);
@@ -392,5 +391,9 @@ $lightGreen: #b9e7e7;
         }
       }
     }
+  }
+
+  .container-width {
+    width: 1024px;
   }
 }
