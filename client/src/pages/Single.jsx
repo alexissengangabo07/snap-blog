@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import { CiEdit } from 'react-icons/ci';
@@ -12,6 +12,7 @@ const Single = () => {
   const [post, setPost] = useState([]);
   const postId = useLocation().pathname.split('/')[2];
   const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +25,17 @@ const Single = () => {
     }
     fetchData();
   }, []);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:5000/api/posts/${postId}`);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   return (
     <main className='single'>
       <div className="content">
@@ -32,13 +44,12 @@ const Single = () => {
           <img src={Image} alt="ok" />
           <div className="info">
             <span>Alexis Sen</span>
-            <p>Posted {moment(new Date()).fromNow()}</p>
+            <p>Posted {moment(post.date).fromNow()}</p>
           </div>
-          {console.log(currentUser?.username, post.username)}
           {currentUser?.username === post.username && (
             <div className="edit">
               <Link to='/write?edit=2'><CiEdit color='teal' size={30} /></Link>
-              <span><BsTrash color='red' size={20} /></span>
+              <span onClick={handleDelete}><BsTrash color='red' size={20} /></span>
             </div>
           )}
         </div>

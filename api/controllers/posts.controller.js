@@ -27,7 +27,14 @@ export const addPostController = (req, res) => {
 }
 
 export const deletePostController = (req, res) => {
-    res.status(200).json({ messsage: 'Oklm' })
+    const { id } = req.params;
+    const deletePostRequest = "DELETE FROM posts WHERE id=?";
+
+    db.query(deletePostRequest, [id], (err, data) => {
+        if (err) return res.json(err);
+
+        return res.json(data);
+    })
 }
 
 export const updatePostController = (req, res) => {
