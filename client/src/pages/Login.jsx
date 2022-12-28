@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { AuthContext } from '../context/auth.context';
 
 const Login = () => {
+  const { currentUser, login } = useContext(AuthContext);
+  
   const [inputs, setInputs] = useState({ username: '', email: '', password: '' });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -15,7 +18,7 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', inputs);
+      login(inputs);
       navigate('/');
     } catch (error) {
       setError(error.response.data);

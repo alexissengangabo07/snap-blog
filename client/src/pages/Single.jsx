@@ -1,10 +1,41 @@
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment';
 import { CiEdit } from 'react-icons/ci';
 import { BsTrash } from 'react-icons/bs';
 import Image from '../images/post.jpg';
 import Menu from '../components/Menu';
+import { AuthContext } from '../context/auth.context';
 
 const Single = () => {
+  const [post, setPost] = useState([]);
+  const postId = useLocation().pathname.split('/')[2];
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/posts/${postId}`);
+        setPost(response.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:5000/api/posts/${postId}`);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   return (
     <main className='single'>
       <div className="content">
@@ -13,23 +44,21 @@ const Single = () => {
           <img src={Image} alt="ok" />
           <div className="info">
             <span>Alexis Sen</span>
-            <p>Posted 2 days ago</p>
+            <p>Posted {moment(post.date).fromNow()}</p>
           </div>
-          <div className="edit">
-            <Link to='/write?edit=2'><CiEdit color='teal' size={30} /></Link>
-            <span><BsTrash color='red' size={20} /></span>
-          </div>
+          {currentUser?.username === post.username && (
+            <div className="edit">
+              <Link to='/write?edit=2'><CiEdit color='teal' size={30} /></Link>
+              <span onClick={handleDelete}><BsTrash color='red' size={20} /></span>
+            </div>
+          )}
         </div>
-        <h1>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste, tempore?</h1>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed exercitationem totam optio laborum maxime vero cupiditate minima, quibusdam doloribus nemo ullam delectus pariatur quae suscipit quo quas tenetur hic sapiente!
-          <br /><br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis mollitia ea consequuntur quis quae magni harum, quos iusto repellat commodi doloribus assumenda numquam nulla aspernatur suscipit ratione, quas maiores perferendis.
-        </p>
+        <h1>{post.title}</h1>
+        {post.content}
       </div>
       <Menu />
     </main>
   )
 }
 
-export default Single
+export default Single;
